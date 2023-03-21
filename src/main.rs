@@ -14,8 +14,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let target_string = format!(r"fn {}[^A-Za-z]", args.func);
     let target_regex = regex::Regex::new(&target_string)?;
 
-    assert!(target_regex.is_match("pub unsafe fn OpenProcess<P0>(dwdesiredaccess: PROCESS_ACCESS_RIGHTS, binherithandle: P0, dwprocessid: u32) -> ::windows::core::Result<super::super::Foundation::HANDLE>"));
-
     for entry in glob::glob(format!("{}/crates/libs/**/*.rs", PATH).as_str())? {
         if let Ok(path) = entry {
             let file = std::fs::read(&path)?;
